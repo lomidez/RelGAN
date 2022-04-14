@@ -11,7 +11,7 @@ def generator(x_real, temperature, vocab_size, batch_size, seq_len, gen_emb_dim,
     output_size = mem_slots * head_size * num_heads
 
     # build relation memory module
-    g_embeddings = tf.get_variable('g_emb', shape=[vocab_size, gen_emb_dim],
+    g_embeddings = tf.compat.v1.get_variable('g_emb', shape=[vocab_size, gen_emb_dim],
                                    initializer=create_linear_initializer(vocab_size))
     gen_mem = RelationalMemory(mem_slots=mem_slots, head_size=head_size, num_heads=num_heads)
     g_output_unit = create_output_unit(output_size, vocab_size)
@@ -102,7 +102,7 @@ def discriminator(x_onehot, batch_size, seq_len, vocab_size, dis_emb_dim, num_re
     num_filters = [300, 300, 300, 300]
     dropout_keep_prob = 0.75
 
-    d_embeddings = tf.get_variable('d_emb', shape=[vocab_size, dis_emb_dim],
+    d_embeddings = tf.compat.v1.get_variable('d_emb', shape=[vocab_size, dis_emb_dim],
                                    initializer=create_linear_initializer(vocab_size))
     input_x_re = tf.reshape(x_onehot, [-1, vocab_size])
     emb_x_re = tf.matmul(input_x_re, d_embeddings)
