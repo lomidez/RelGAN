@@ -350,24 +350,24 @@ def get_metric_summary_op(config):
     metrics_sum = []
 
     if config['nll_gen']:
-        nll_gen = tf.placeholder(tf.float32)
+        nll_gen = tf.compat.v1.placeholder(tf.float32)
         metrics_pl.append(nll_gen)
         metrics_sum.append(tf.summary.scalar('metrics/nll_gen', nll_gen))
 
     if config['doc_embsim']:
-        doc_embsim = tf.placeholder(tf.float32)
+        doc_embsim = tf.compat.v1.placeholder(tf.float32)
         metrics_pl.append(doc_embsim)
         metrics_sum.append(tf.summary.scalar('metrics/doc_embsim', doc_embsim))
 
     if config['bleu']:
         for i in range(2, 6):
-            temp_pl = tf.placeholder(tf.float32, name='bleu{}'.format(i))
+            temp_pl = tf.compat.v1.placeholder(tf.float32, name='bleu{}'.format(i))
             metrics_pl.append(temp_pl)
             metrics_sum.append(tf.summary.scalar('metrics/bleu{}'.format(i), temp_pl))
 
     if config['selfbleu']:
         for i in range(2, 6):
-            temp_pl = tf.placeholder(tf.float32, name='selfbleu{}'.format(i))
+            temp_pl = tf.compat.v1.placeholder(tf.float32, name='selfbleu{}'.format(i))
             metrics_pl.append(temp_pl)
             metrics_sum.append(tf.summary.scalar('metrics/selfbleu{}'.format(i), temp_pl))
 
