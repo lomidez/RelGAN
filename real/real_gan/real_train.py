@@ -49,7 +49,7 @@ def real_train(generator, discriminator, oracle_loader, config):
         os.makedirs(log_dir)
 
     # placeholder definitions
-    x_real = tf.placeholder(tf.int32, [batch_size, seq_len], name="x_real")  # tokens of oracle sequences
+    x_real = tf.compat.v1.placeholder(tf.int32, [batch_size, seq_len], name="x_real")  # tokens of oracle sequences
 
     temperature = tf.Variable(1., trainable=False, name='temperature')
 
@@ -73,12 +73,12 @@ def real_train(generator, discriminator, oracle_loader, config):
     g_pretrain_op, g_train_op, d_train_op = get_train_ops(config, g_pretrain_loss, g_loss, d_loss, global_step)
 
     # Record wall clock time
-    time_diff = tf.placeholder(tf.float32)
+    time_diff = tf.compat.v1.placeholder(tf.float32)
     Wall_clock_time = tf.Variable(0., trainable=False)
     update_Wall_op = Wall_clock_time.assign_add(time_diff)
 
     # Temperature placeholder
-    temp_var = tf.placeholder(tf.float32)
+    temp_var = tf.compat.v1.placeholder(tf.float32)
     update_temperature_op = temperature.assign(temp_var)
 
     # Loss summaries
