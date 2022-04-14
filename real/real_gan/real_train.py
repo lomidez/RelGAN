@@ -8,6 +8,7 @@ from utils.metrics.Bleu import Bleu
 from utils.metrics.SelfBleu import SelfBleu
 from utils.utils import *
 from utils.ops import gradient_penalty
+tf.compat.v1.disable_eager_execution()
 
 EPS = 1e-10
 
