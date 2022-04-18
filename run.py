@@ -65,6 +65,8 @@ def main():
     args = parser.parse_args()
     pp.pprint(vars(args))
     config = vars(args)
+    ##########################
+    print(config)
 
     # train with different datasets
     if args.dataset == 'oracle':
